@@ -30,7 +30,7 @@ module Workflow
             end
             self.send("#{self.class.workflow_column}=", new_value)
             if self.respond_to?(:clear_attribute_changes, true) # Rails >= 4.2 - changed_attributes is dynamically computed
-              clear_attribute_changes(self.class.workflow_column)
+              clear_attribute_changes(Array(self.class.workflow_column))
             elsif self.respond_to?(:changed_attributes) # Rails < 4.2
               self.changed_attributes.delete(self.class.workflow_column)
             end
